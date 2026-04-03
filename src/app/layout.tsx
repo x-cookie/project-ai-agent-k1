@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import "./globals.css";
-import Script from "next/script";
+import { PageTransition } from "@/components/shared/PageTransition";
 
 export const metadata: Metadata = {
   title: "AI Agents from Scratch",
@@ -15,7 +15,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
       </head>
-      <body>{children}</body>
+      <body>
+        <PageTransition>{children}</PageTransition>
+      </body>
     </html>
   );
 }

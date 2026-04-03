@@ -157,6 +157,31 @@ body {
 .hljs-variable  { color: #e6edf3; }
 .hljs-operator  { color: #ff7b72; }
 
+/* ── Compact markdown inside chat bubbles ────────────────────── */
+.chat-md p                 { font-size: 12px; color: var(--t2); line-height: 1.65; margin-bottom: 6px; }
+.chat-md p:last-child      { margin-bottom: 0; }
+.chat-md h1, .chat-md h2,
+.chat-md h3, .chat-md h4  { font-size: 10px; font-weight: 600; color: var(--t3); text-transform: uppercase; letter-spacing: 0.07em; font-family: var(--mono); margin: 10px 0 5px; }
+.chat-md strong            { color: var(--t1); font-weight: 500; }
+.chat-md em                { color: var(--t2); }
+.chat-md ul, .chat-md ol   { padding-left: 14px; margin-bottom: 6px; font-size: 12px; color: var(--t2); }
+.chat-md li                { margin-bottom: 2px; line-height: 1.6; }
+.chat-md code              { font-family: var(--mono); font-size: 10.5px; background: var(--bg4); border: 0.5px solid var(--bd2); border-radius: 3px; padding: 1px 4px; color: #d4d4d4; }
+.chat-md pre               { background: var(--bg) !important; border: 0.5px solid var(--bd2); border-radius: 4px; padding: 10px 12px; margin: 6px 0; overflow-x: auto; }
+.chat-md pre code          { background: transparent; border: none; padding: 0; font-size: 10.5px; line-height: 1.65; }
+.chat-md table             { width: 100%; border-collapse: collapse; font-size: 11px; margin: 6px 0; }
+.chat-md th, .chat-md td   { padding: 4px 8px; border: 0.5px solid var(--bd2); text-align: left; }
+.chat-md th                { background: var(--bg3); color: var(--t2); font-weight: 500; }
+.chat-md td                { color: var(--t3); }
+.chat-md a                 { color: var(--purple); text-decoration: none; }
+.chat-md blockquote        { border-left: 2px solid var(--purple); padding-left: 10px; color: var(--t3); font-style: italic; margin: 4px 0; }
+
+/* ── Typing animation ────────────────────────────────────────── */
+@keyframes typing-dot {
+  0%, 80%, 100% { transform: scale(0.55); opacity: 0.25; }
+  40%            { transform: scale(1);    opacity: 1; }
+}
+
 /* ── Landing page animations ─────────────────────────────────── */
 @keyframes float-up   { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes fade-in    { from { opacity: 0; } to { opacity: 1; } }

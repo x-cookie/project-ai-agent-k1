@@ -97,21 +97,31 @@ export default function LandingPage() {
         <div aria-hidden style={{ position: "absolute", top: "15%", right: "12%", width: "380px", height: "380px", borderRadius: "50%", background: "radial-gradient(circle, rgba(124,113,232,0.1) 0%, transparent 70%)", animation: "orb-drift 12s ease-in-out infinite", pointerEvents: "none" }} />
         <div aria-hidden style={{ position: "absolute", bottom: "20%", left: "8%",  width: "280px", height: "280px", borderRadius: "50%", background: "radial-gradient(circle, rgba(74,222,128,0.06) 0%, transparent 70%)", animation: "orb-drift 16s ease-in-out infinite reverse", pointerEvents: "none" }} />
 
-        {/* TopNav */}
-        <nav style={{ position: "relative", zIndex: 10, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 32px", height: "44px", borderBottom: "0.5px solid var(--bd)" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-            <div style={{ width: "20px", height: "20px", background: "var(--acc)", borderRadius: "3px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M5.5 1L10 9.5H1L5.5 1Z" fill="#000" /></svg>
+        {/* TopNav — bigger, centered links */}
+        <nav style={{ position: "relative", zIndex: 10, display: "grid", gridTemplateColumns: "1fr auto 1fr", alignItems: "center", padding: "0 32px", height: "60px", borderBottom: "0.5px solid var(--bd)" }}>
+          {/* Left: logo */}
+          <Link href="/" style={{ display: "flex", alignItems: "center", gap: "9px", textDecoration: "none" }}>
+            <div style={{ width: "24px", height: "24px", background: "var(--acc)", borderRadius: "4px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <svg width="13" height="13" viewBox="0 0 11 11" fill="none"><path d="M5.5 1L10 9.5H1L5.5 1Z" fill="#000" /></svg>
             </div>
-            <span style={{ fontSize: "13px", fontWeight: 500, color: "var(--t1)", letterSpacing: "-0.01em" }}>agents from scratch</span>
-          </div>
-          <div style={{ display: "flex", gap: "16px" }}>
+            <span style={{ fontSize: "14px", fontWeight: 500, color: "var(--t1)", letterSpacing: "-0.02em" }}>agents from scratch</span>
+          </Link>
+          {/* Center: primary navigation */}
+          <div style={{ display: "flex", gap: "4px" }}>
             {[
               { href: "/learn", label: "Roadmap" },
               { href: "/docs",  label: "Docs"    },
             ].map(l => (
-              <Link key={l.href} href={l.href} style={{ fontSize: "12px", color: "var(--t2)", textDecoration: "none" }}>{l.label}</Link>
+              <Link key={l.href} href={l.href} style={{ fontSize: "13px", fontWeight: 500, color: "var(--t2)", textDecoration: "none", padding: "6px 14px", borderRadius: "5px", border: "0.5px solid transparent", transition: "color 0.15s" }}>
+                {l.label}
+              </Link>
             ))}
+          </div>
+          {/* Right: CTA */}
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <Link href="/learn" style={{ fontSize: "13px", fontWeight: 500, padding: "7px 18px", borderRadius: "5px", background: "var(--acc)", color: "#000", textDecoration: "none" }}>
+              Start free →
+            </Link>
           </div>
         </nav>
 

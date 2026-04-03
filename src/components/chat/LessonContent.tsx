@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { MarkdownRenderer } from "./MarkdownRenderer";
+import { markComplete, getCompleted } from "@/lib/progress";
+import { LESSONS } from "@/lib/lessons";
 import type { Lesson } from "@/lib/lessons";
 
 interface Props {
@@ -21,10 +23,22 @@ type Tab = "concept" | "code";
 
 export function LessonContent({ lesson, concept, code, prev, next }: Props) {
   const [tab, setTab] = useState<Tab>("concept");
+  const [completed, setCompleted] = useState<Set<string>>(new Set());
+  const isDone = completed.has(lesson.folder);
+
+  useEffect(() => { setCompleted(getCompleted()); }, []);
+
+  const handleComplete = useCallback(() => {
+    const updated = markComplete(lesson.folder);
+    setCompleted(new Set(updated));
+  }, [lesson.folder]);
+
+  const nextLesson = LESSONS.find(l => l.num === lesson.num + 1) ?? null;
 
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100%", overflow: "hidden" }}>
-      {/* Tab bar */}
+
+      {/* Tab bar — only longhand border props to avoid React style conflict */}
       <div style={{ display: "flex", padding: "0 26px", borderBottom: "0.5px solid var(--bd)", flexShrink: 0 }}>
         {TABS.map(t => (
           <button
@@ -35,11 +49,13 @@ export function LessonContent({ lesson, concept, code, prev, next }: Props) {
               padding: "9px 10px",
               cursor: "pointer",
               color: tab === t.key ? "var(--t1)" : "var(--t3)",
-              borderBottom: tab === t.key ? "1px solid var(--t1)" : "1px solid transparent",
               marginBottom: "-0.5px",
               background: "transparent",
-              border: "none",
-              borderBottomWidth: "1px",
+              /* Use only longhand border — avoids shorthand/longhand conflict */
+              borderTopWidth: 0,
+              borderRightWidth: 0,
+              borderLeftWidth: 0,
+              borderBottomWidth: 1,
               borderBottomStyle: "solid",
               borderBottomColor: tab === t.key ? "var(--t1)" : "transparent",
               letterSpacing: "0.01em",
@@ -52,7 +68,7 @@ export function LessonContent({ lesson, concept, code, prev, next }: Props) {
         ))}
       </div>
 
-      {/* Content area */}
+      {/* Scrollable content */}
       <div style={{ flex: 1, overflowY: "auto", padding: "20px 26px" }}>
         {tab === "concept" && (
           <MarkdownRenderer>
@@ -65,22 +81,46 @@ export function LessonContent({ lesson, concept, code, prev, next }: Props) {
           </MarkdownRenderer>
         )}
 
-        {/* Prev / Next navigation */}
-        <div style={{ display: "flex", gap: "7px", marginTop: "24px", paddingTop: "12px", borderTop: "0.5px solid var(--bd)" }}>
-          {prev ? (
-            <a href={`/learn/${prev.folder}`} style={{ fontSize: "11.5px", padding: "5px 12px", border: "0.5px solid var(--bd2)", borderRadius: "4px", background: "transparent", color: "var(--t2)", textDecoration: "none" }}>
-              ← {prev.title}
-            </a>
+        {/* Mark complete + nav */}
+        <div style={{ marginTop: "28px", paddingTop: "16px", borderTop: "0.5px solid var(--bd)" }}>
+
+          {!isDone ? (
+            <button
+              onClick={handleComplete}
+              style={{
+                display: "inline-flex", alignItems: "center", gap: "6px",
+                fontSize: "12px", padding: "7px 16px", borderRadius: "5px",
+                background: "transparent", border: "0.5px solid var(--green2)",
+                color: "var(--green)", cursor: "pointer", fontFamily: "var(--sans)",
+                marginBottom: "14px",
+              }}
+            >
+              <i className="ti ti-check" style={{ fontSize: "13px" }} aria-hidden />
+              Mark as complete
+            </button>
           ) : (
-            <a href="/learn" style={{ fontSize: "11.5px", padding: "5px 12px", border: "0.5px solid var(--bd2)", borderRadius: "4px", background: "transparent", color: "var(--t2)", textDecoration: "none" }}>
-              ← roadmap
-            </a>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", fontSize: "12px", color: "var(--green)", marginBottom: "14px", padding: "7px 16px", background: "#0a1f0f", border: "0.5px solid var(--green2)", borderRadius: "5px" }}>
+              <i className="ti ti-check" style={{ fontSize: "13px" }} aria-hidden />
+              Lesson complete
+            </div>
           )}
-          {next && (
-            <a href={`/learn/${next.folder}`} style={{ fontSize: "11.5px", padding: "5px 12px", border: "0.5px solid var(--acc)", borderRadius: "4px", background: "var(--acc)", color: "#000", textDecoration: "none" }}>
-              {next.title} →
-            </a>
-          )}
+
+          <div style={{ display: "flex", gap: "7px", flexWrap: "wrap" }}>
+            {prev ? (
+              <a href={`/learn/${prev.folder}`} style={{ fontSize: "11.5px", padding: "5px 12px", border: "0.5px solid var(--bd2)", borderRadius: "4px", background: "transparent", color: "var(--t2)", textDecoration: "none" }}>
+                ← {prev.title}
+              </a>
+            ) : (
+              <a href="/learn" style={{ fontSize: "11.5px", padding: "5px 12px", border: "0.5px solid var(--bd2)", borderRadius: "4px", background: "transparent", color: "var(--t2)", textDecoration: "none" }}>
+                ← roadmap
+              </a>
+            )}
+            {next && (
+              <a href={`/learn/${next.folder}`} style={{ fontSize: "11.5px", padding: "5px 12px", border: "0.5px solid var(--acc)", borderRadius: "4px", background: "var(--acc)", color: "#000", textDecoration: "none" }}>
+                {next.title} →
+              </a>
+            )}
+          </div>
         </div>
       </div>
     </div>

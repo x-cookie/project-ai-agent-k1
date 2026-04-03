@@ -16,39 +16,28 @@ export function TopNav({ crumb, progress, total = 14, backHref, backLabel }: Top
   return (
     <nav
       style={{
-        display: "flex",
+        display: "grid",
+        gridTemplateColumns: "1fr auto 1fr",
         alignItems: "center",
-        justifyContent: "space-between",
-        padding: "0 20px",
-        height: "44px",
+        padding: "0 24px",
+        height: "56px",
         borderBottom: "0.5px solid var(--bd)",
         background: "var(--bg)",
         flexShrink: 0,
       }}
     >
-      {/* Left */}
+      {/* Left: logo + breadcrumb */}
       <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-        <Link href="/" style={{ display: "flex", alignItems: "center", gap: "7px", textDecoration: "none" }}>
-          <div
-            style={{
-              width: "20px",
-              height: "20px",
-              background: "var(--acc)",
-              borderRadius: "3px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+        <Link href="/" style={{ display: "flex", alignItems: "center", gap: "8px", textDecoration: "none" }}>
+          <div style={{ width: "22px", height: "22px", background: "var(--acc)", borderRadius: "3px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <svg width="12" height="12" viewBox="0 0 11 11" fill="none">
               <path d="M5.5 1L10 9.5H1L5.5 1Z" fill="#000" />
             </svg>
           </div>
-          <span style={{ fontSize: "13px", fontWeight: 500, color: "var(--t1)", letterSpacing: "-0.01em" }}>
+          <span style={{ fontSize: "14px", fontWeight: 500, color: "var(--t1)", letterSpacing: "-0.02em" }}>
             agents from scratch
           </span>
         </Link>
-
         {crumb && (
           <>
             <div style={{ width: "0.5px", height: "16px", background: "var(--bd2)" }} />
@@ -57,52 +46,29 @@ export function TopNav({ crumb, progress, total = 14, backHref, backLabel }: Top
         )}
       </div>
 
-      {/* Right */}
-      <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+      {/* Center: nav links */}
+      <div style={{ display: "flex", gap: "4px" }}>
+        {[
+          { href: "/learn", label: "Roadmap" },
+          { href: "/docs",  label: "Docs"    },
+        ].map(l => (
+          <Link key={l.href} href={l.href} style={{ fontSize: "13px", fontWeight: 500, color: "var(--t2)", textDecoration: "none", padding: "5px 12px", borderRadius: "4px" }}>
+            {l.label}
+          </Link>
+        ))}
+      </div>
+
+      {/* Right: back + progress pills */}
+      <div style={{ display: "flex", alignItems: "center", gap: "8px", justifyContent: "flex-end" }}>
         {backHref && (
-          <Link
-            href={backHref}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "5px",
-              fontSize: "12px",
-              color: "var(--t2)",
-              padding: "4px 8px",
-              borderRadius: "4px",
-              border: "0.5px solid var(--bd2)",
-              background: "transparent",
-              textDecoration: "none",
-            }}
-          >
+          <Link href={backHref} style={{ display: "flex", alignItems: "center", gap: "5px", fontSize: "12px", color: "var(--t2)", padding: "4px 10px", borderRadius: "4px", border: "0.5px solid var(--bd2)", background: "transparent", textDecoration: "none" }}>
             ← {backLabel ?? "back"}
           </Link>
         )}
-        <div
-          style={{
-            fontSize: "11px",
-            padding: "3px 9px",
-            borderRadius: "3px",
-            background: "var(--bg3)",
-            border: "0.5px solid var(--bd2)",
-            color: "var(--t3)",
-            fontFamily: "var(--mono)",
-          }}
-        >
+        <div style={{ fontSize: "11px", padding: "3px 10px", borderRadius: "3px", background: "var(--bg3)", border: "0.5px solid var(--bd2)", color: "var(--t3)", fontFamily: "var(--mono)" }}>
           {pct}
         </div>
-        <div
-          style={{
-            fontSize: "11px",
-            padding: "3px 9px",
-            borderRadius: "3px",
-            color: "var(--green)",
-            borderColor: "#166534",
-            background: "#0a1f0f",
-            border: "0.5px solid #166534",
-            fontFamily: "var(--mono)",
-          }}
-        >
+        <div style={{ fontSize: "11px", padding: "3px 10px", borderRadius: "3px", color: "var(--green)", background: "#0a1f0f", border: "0.5px solid #166534", fontFamily: "var(--mono)" }}>
           ● ready
         </div>
       </div>
