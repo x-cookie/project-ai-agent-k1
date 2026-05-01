@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { LESSONS, STAGES } from "@/lib/lessons";
-import { getCompleted, isUnlocked } from "@/lib/progress";
+import { getCompleted } from "@/lib/progress";
+import { CircuitBackground } from "@/components/roadmap/CircuitBackground";
 
 const stageGroups = {
   fundamentals:         LESSONS.filter(l => l.stage === "fundamentals"),
@@ -80,10 +81,11 @@ export default function BranchPage() {
   useEffect(() => { setCompleted(getCompleted()); }, []);
 
   return (
-    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", background: "var(--bg)" }}>
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", background: "var(--bg)", position: "relative" }}>
+      <CircuitBackground />
 
-      {/* Bigger shared nav */}
-      <nav style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 32px", height: "56px", borderBottom: "0.5px solid var(--bd)", background: "var(--bg)", flexShrink: 0 }}>
+      {/* Bigger shared nav — z-index above circuit canvas */}
+      <nav style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 32px", height: "56px", borderBottom: "0.5px solid var(--bd)", background: "rgba(10,10,10,0.85)", backdropFilter: "blur(8px)", flexShrink: 0, position: "relative", zIndex: 10 }}>
         <Link href="/" style={{ display: "flex", alignItems: "center", gap: "8px", textDecoration: "none" }}>
           <div style={{ width: "22px", height: "22px", background: "var(--acc)", borderRadius: "3px", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <svg width="12" height="12" viewBox="0 0 11 11" fill="none"><path d="M5.5 1L10 9.5H1L5.5 1Z" fill="#000" /></svg>
@@ -106,7 +108,7 @@ export default function BranchPage() {
       </nav>
 
       {/* Hero */}
-      <div style={{ padding: "32px 32px 24px", borderBottom: "0.5px solid var(--bd)" }}>
+      <div style={{ padding: "32px 32px 24px", borderBottom: "0.5px solid var(--bd)", position: "relative", zIndex: 1, background: "rgba(10,10,10,0.6)", backdropFilter: "blur(2px)" }}>
         <div style={{ fontSize: "10px", color: "var(--t3)", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "var(--mono)", marginBottom: "8px" }}>learning path</div>
         <h1 style={{ fontSize: "26px", fontWeight: 500, color: "var(--t1)", letterSpacing: "-0.03em", lineHeight: 1.1 }}>AI agents from scratch</h1>
         <p style={{ fontSize: "13px", color: "var(--t2)", marginTop: "8px", lineHeight: 1.65, maxWidth: "460px" }}>
@@ -123,7 +125,7 @@ export default function BranchPage() {
       </div>
 
       {/* Skill tree */}
-      <div style={{ flex: 1, overflowY: "auto", padding: "28px 32px" }}>
+      <div style={{ flex: 1, overflowY: "auto", padding: "28px 32px", position: "relative", zIndex: 1 }}>
         {STAGES.map(stage => {
           const lessons = stageGroups[stage.key as keyof typeof stageGroups];
           return (

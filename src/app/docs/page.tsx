@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { TopNav } from "@/components/shared/TopNav";
 import { LESSONS, STAGES } from "@/lib/lessons";
+import { DataStream } from "@/components/docs/DataStream";
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -41,10 +42,13 @@ const FAQ = [
 
 export default function DocsPage() {
   return (
-    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", background: "var(--bg)" }}>
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", background: "var(--bg)", position: "relative" }}>
+      {/* Floating code tokens — fixed behind everything */}
+      <DataStream />
+
       <TopNav crumb={<span style={{ color: "var(--t2)" }}>docs</span>} />
 
-      <div style={{ flex: 1, display: "flex" }}>
+      <div style={{ flex: 1, display: "flex", position: "relative", zIndex: 1 }}>
         {/* Sidebar TOC */}
         <aside
           style={{
@@ -55,7 +59,9 @@ export default function DocsPage() {
             position: "sticky",
             top: 0,
             alignSelf: "flex-start",
-            height: "calc(100vh - 44px)",
+            height: "calc(100vh - 56px)",
+            background: "rgba(10,10,10,0.7)",
+            backdropFilter: "blur(4px)",
           }}
         >
           {[
@@ -85,7 +91,7 @@ export default function DocsPage() {
         </aside>
 
         {/* Main content */}
-        <main style={{ flex: 1, padding: "32px 40px", overflowY: "auto", maxWidth: "800px" }}>
+        <main style={{ flex: 1, padding: "32px 40px", overflowY: "auto", maxWidth: "800px", background: "rgba(10,10,10,0.5)", backdropFilter: "blur(2px)" }}>
           <div style={{ fontSize: "10px", color: "var(--t3)", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "var(--mono)", marginBottom: "12px" }}>
             technical reference
           </div>
