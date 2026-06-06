@@ -86,7 +86,7 @@ export default function BranchPage() {
       <nav style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 32px", height: "56px", borderBottom: "0.5px solid var(--bd)", background: "rgba(10,10,10,0.85)", backdropFilter: "blur(8px)", flexShrink: 0, position: "relative", zIndex: 10 }}>
         <Link href="/" style={{ display: "flex", alignItems: "center", gap: "8px", textDecoration: "none" }}>
           <Image src="/logo-agent.png" alt="logo" width={28} height={28} style={{ borderRadius: "4px" }} />
-          <span style={{ fontSize: "14px", fontWeight: 500, color: "var(--t1)", letterSpacing: "-0.01em" }}>agentlearn.fun</span>
+          <span style={{ fontSize: "14px", fontWeight: 500, color: "var(--t1)", letterSpacing: "-0.01em" }}>agent</span>
         </Link>
         <div style={{ display: "flex", gap: "28px" }}>
           {[{ href: "/learn", label: "Roadmap" }, { href: "/docs", label: "Docs" }].map(l => (
@@ -106,7 +106,7 @@ export default function BranchPage() {
       {/* Hero */}
       <div style={{ padding: "32px 32px 24px", borderBottom: "0.5px solid var(--bd)", position: "relative", zIndex: 1, background: "rgba(10,10,10,0.6)", backdropFilter: "blur(2px)" }}>
         <div style={{ fontSize: "10px", color: "var(--t3)", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "var(--mono)", marginBottom: "8px" }}>learning path</div>
-        <h1 style={{ fontSize: "26px", fontWeight: 500, color: "var(--t1)", letterSpacing: "-0.03em", lineHeight: 1.1 }}>AI agentlearn.fun</h1>
+        <h1 style={{ fontSize: "26px", fontWeight: 500, color: "var(--t1)", letterSpacing: "-0.03em", lineHeight: 1.1 }}>AI agents from scratch</h1>
         <p style={{ fontSize: "13px", color: "var(--t2)", marginTop: "8px", lineHeight: 1.65, maxWidth: "460px" }}>
           14 lessons, 3 stages. Complete each lesson in order to unlock the next.
         </p>

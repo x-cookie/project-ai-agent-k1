@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="public/logo-agent.png" alt="agentlearn.fun logo" width="72" height="72" />
+<img src="public/logo-agent.png" alt="agent logo" width="72" height="72" />
 
-# agentlearn.fun
+# agent
 
 **14-lesson Node.js course portal for building AI agents from first principles.**
 

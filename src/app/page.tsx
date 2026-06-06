@@ -103,7 +103,7 @@ export default function LandingPage() {
           {/* Left: logo */}
           <Link href="/" style={{ display: "flex", alignItems: "center", gap: "9px", textDecoration: "none" }}>
             <Image src="/logo-agent.png" alt="logo" width={28} height={28} style={{ borderRadius: "4px" }} />
-            <span style={{ fontSize: "14px", fontWeight: 500, color: "var(--t1)", letterSpacing: "-0.02em" }}>agentlearn.fun</span>
+            <span style={{ fontSize: "14px", fontWeight: 500, color: "var(--t1)", letterSpacing: "-0.02em" }}>agent</span>
           </Link>
           {/* Center: primary navigation */}
           <div style={{ display: "flex", gap: "4px" }}>
@@ -419,7 +419,7 @@ export default function LandingPage() {
       <footer style={{ padding: "20px 32px", borderTop: "0.5px solid var(--bd)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
           <Image src="/logo-agent.png" alt="logo" width={18} height={18} style={{ borderRadius: "2px" }} />
-          <span style={{ fontSize: "11px", color: "var(--t3)", fontFamily: "var(--mono)" }}>agentlearn.fun</span>
+          <span style={{ fontSize: "11px", color: "var(--t3)", fontFamily: "var(--mono)" }}>agent</span>
         </div>
         <span style={{ fontSize: "11px", color: "var(--t4)", fontFamily: "var(--mono)" }}>14 lessons · 3 stages · MIT license</span>
       </footer>

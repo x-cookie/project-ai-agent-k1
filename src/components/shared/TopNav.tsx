@@ -32,7 +32,7 @@ export function TopNav({ crumb, progress, total = 14, backHref, backLabel }: Top
         <Link href="/" style={{ display: "flex", alignItems: "center", gap: "8px", textDecoration: "none" }}>
           <Image src="/logo-agent.png" alt="logo" width={28} height={28} style={{ borderRadius: "4px" }} />
           <span style={{ fontSize: "14px", fontWeight: 500, color: "var(--t1)", letterSpacing: "-0.02em" }}>
-            agentlearn.fun
+            agent
           </span>
         </Link>
         {crumb && (
