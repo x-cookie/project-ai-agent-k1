@@ -72,7 +72,10 @@ function NodeConnector({ done }: { done: boolean }) {
 export default function BranchPage() {
   const [completed, setCompleted] = useState<Set<string>>(new Set());
 
-  useEffect(() => { setCompleted(getCompleted()); }, []);
+  useEffect(() => {
+    const c = getCompleted();
+    setCompleted(c); // eslint-disable-line react-hooks/set-state-in-effect
+  }, []);
 
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", background: "var(--bg)", position: "relative" }}>
@@ -135,13 +138,7 @@ export default function BranchPage() {
               <div style={{ display: "flex", alignItems: "stretch", flexWrap: "wrap" }}>
                 {lessons.map((lesson, i) => {
                   const done = completed.has(lesson.folder);
-                  const unlocked = i === 0
-                    ? (stage.key === "fundamentals" || completed.has(STAGE_GROUPS[stage.key === "agent-patterns" ? "fundamentals" : "agent-patterns"].slice(-1)[0].folder))
-                    : completed.has(lessons[i - 1].folder);
-                  const absoluteIdx = LESSONS.findIndex(l => l.id === lesson.id);
-                  const isFirstLesson = absoluteIdx === 0;
-                  const prevLesson = absoluteIdx > 0 ? LESSONS[absoluteIdx - 1] : null;
-                  const unlockedFinal = isFirstLesson || (prevLesson ? completed.has(prevLesson.folder) : false);
+                  const unlockedFinal = true;
 
                   return (
                     <div key={lesson.id} style={{ display: "flex", alignItems: "center" }}>

@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import Link from "next/link";
 import { MarkdownRenderer } from "./MarkdownRenderer";
 import { markComplete, getCompleted } from "@/lib/progress";
-import { LESSONS } from "@/lib/lessons";
 import type { Lesson } from "@/lib/lessons";
 
 interface Props {
@@ -26,7 +26,10 @@ export function LessonContent({ lesson, concept, code, prev, next }: Props) {
   const [completed, setCompleted] = useState<Set<string>>(new Set());
   const isDone = completed.has(lesson.folder);
 
-  useEffect(() => { setCompleted(getCompleted()); }, []);
+  useEffect(() => {
+    const c = getCompleted();
+    setCompleted(c); // eslint-disable-line react-hooks/set-state-in-effect
+  }, []);
 
   /* Keyboard navigation: ← prev lesson, → next lesson */
   useEffect(() => {
@@ -43,8 +46,6 @@ export function LessonContent({ lesson, concept, code, prev, next }: Props) {
     const updated = markComplete(lesson.folder);
     setCompleted(new Set(updated));
   }, [lesson.folder]);
-
-  const nextLesson = LESSONS.find(l => l.num === lesson.num + 1) ?? null;
 
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100%", overflow: "hidden" }}>
@@ -118,18 +119,18 @@ export function LessonContent({ lesson, concept, code, prev, next }: Props) {
 
           <div style={{ display: "flex", gap: "7px", flexWrap: "wrap" }}>
             {prev ? (
-              <a href={`/learn/${prev.folder}`} style={{ fontSize: "11.5px", padding: "5px 12px", border: "0.5px solid var(--bd2)", borderRadius: "4px", background: "transparent", color: "var(--t2)", textDecoration: "none" }}>
+              <Link href={`/learn/${prev.folder}`} style={{ fontSize: "11.5px", padding: "5px 12px", border: "0.5px solid var(--bd2)", borderRadius: "4px", background: "transparent", color: "var(--t2)", textDecoration: "none" }}>
                 ← {prev.title}
-              </a>
+              </Link>
             ) : (
-              <a href="/learn" style={{ fontSize: "11.5px", padding: "5px 12px", border: "0.5px solid var(--bd2)", borderRadius: "4px", background: "transparent", color: "var(--t2)", textDecoration: "none" }}>
+              <Link href="/learn" style={{ fontSize: "11.5px", padding: "5px 12px", border: "0.5px solid var(--bd2)", borderRadius: "4px", background: "transparent", color: "var(--t2)", textDecoration: "none" }}>
                 ← roadmap
-              </a>
+              </Link>
             )}
             {next && (
-              <a href={`/learn/${next.folder}`} style={{ fontSize: "11.5px", padding: "5px 12px", border: "0.5px solid var(--acc)", borderRadius: "4px", background: "var(--acc)", color: "#000", textDecoration: "none" }}>
+              <Link href={`/learn/${next.folder}`} style={{ fontSize: "11.5px", padding: "5px 12px", border: "0.5px solid var(--acc)", borderRadius: "4px", background: "var(--acc)", color: "#000", textDecoration: "none" }}>
                 {next.title} →
-              </a>
+              </Link>
             )}
           </div>
         </div>

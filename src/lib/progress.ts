@@ -1,5 +1,3 @@
-import { LESSONS } from "./lessons";
-
 const KEY = "afs_progress";
 
 export function getCompleted(): Set<string> {
@@ -19,8 +17,7 @@ export function markComplete(folder: string): Set<string> {
   return completed;
 }
 
-export function isUnlocked(folder: string): boolean {
-  const idx = LESSONS.findIndex(l => l.folder === folder);
-  if (idx <= 0) return true;
-  return getCompleted().has(LESSONS[idx - 1].folder);
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function isUnlocked(_folder: string): boolean {
+  return true;
 }
